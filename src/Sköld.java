@@ -1,2 +1,5 @@
-public class Sköld {
+public class Sköld extends Föremål{
+    private int försvarsStyrka;
+
+
 }
