@@ -1,11 +1,11 @@
 abstract class Kämpe implements SpecialFörmåga{
-    private int hälsa;
-    private int styrka;
-    private double hastighet;
-    private String namn;
-    private double försvar;
-    private int skada;
-    private SpecialFörmåga specialFörmåga;
+    protected int hälsa;
+    protected int styrka;
+    protected double hastighet;
+    protected String namn;
+    protected double försvar;
+    protected int skada;
+    protected SpecialFörmåga specialFörmåga;
 
     public Kämpe(double försvar, double hastighet, int hälsa, String namn, int styrka, SpecialFörmåga specialFörmåga) {
         this.försvar = försvar;
@@ -16,25 +16,28 @@ abstract class Kämpe implements SpecialFörmåga{
         this.specialFörmåga = specialFörmåga;
     }
 
-    public void attack(Kämpe motståndare){
+    // Attackmetod
+    public abstract void attack(Kämpe motståndare);  // Ingen implementation här, bara definition, attackmetod definieras  i subklasser
+    //Specialförmåga metod
+    public abstract void användSpecialFörmåga(Kämpe motståndare);  // Specialförmåga definieras också i subklasser
 
+    // Undvik attack
+    public boolean undvikaAttack(Kämpe motståndare){
+        double chansAttUndvika = this.hastighet / (this.hastighet + motståndare.hastighet); // Undvikande logik baserat på hastighet
+        return Math.random() < chansAttUndvika;
     }
 
-    public void undvikaAttack(Kämpe motståndare){
-
-    }
-
-    public void taSkada(int skada){
-
-    }
+    // Ta skada
+    public void taSkada(int skada) {
+        // Subtrahera försvar från skadan innan den tillämpas
+        int skadaEfterFörsvar = Math.max(0, skada - (int) försvar);
+        this.hälsa -= skadaEfterFörsvar;
+        System.out.println(this.namn + " tar " + skadaEfterFörsvar + " skada, nuvarande hälsa: " + this.hälsa);}
 
     public boolean lever(){
-        return true;
+        return hälsa > 0;
     }
-
-    @Override
-    public void användFörmåga(Kämpe mål) {
 
     }
 
-}
+
