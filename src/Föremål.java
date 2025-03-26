@@ -1,4 +1,4 @@
-abstract class Föremål {
+abstract class Föremål<T> {
     private String namn;
     private String beskrivning;
 
@@ -10,7 +10,7 @@ abstract class Föremål {
         return namn;
     }
 
-    public String fåBeskrivningz(){
+    public String fåBeskrivning(){
         return beskrivning;
     }
 }
