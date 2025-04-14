@@ -10,7 +10,6 @@ public class Enemy extends Fighter {
 
     }
 
-
     @Override
     public void useAbility(Fighter target) {
 
