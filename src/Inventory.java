@@ -42,3 +42,4 @@ class Inventory {
         return items.isEmpty();
     }
 }
+

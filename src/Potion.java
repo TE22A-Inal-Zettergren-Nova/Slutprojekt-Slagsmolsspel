@@ -1,6 +1,6 @@
 class Potion extends Item {
-    private String type; //Which type of potion ex. health
-    private int effectValue; //How much it gives the player ex. 30 hp
+    private String type; //Which type of potion e.g. health
+    private int effectValue; //How much it gives the player e.g. 30 hp
 
     //Constructor for potion
     public Potion(String name, String description, String type, int effectValue) {

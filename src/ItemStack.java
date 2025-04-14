@@ -1,4 +1,5 @@
 // Represents a stack of identical items in the inventory
+
 class ItemStack {
     private Item item;        // The actual item (only one instance needed)
     private int quantity;     // How many of this item are in the stack
