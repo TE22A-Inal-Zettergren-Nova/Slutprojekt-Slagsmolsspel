@@ -1,7 +1,6 @@
 class Shield extends Item {
-    private int defensePower; //The added defence from the shield
+    private final int defensePower;
 
-    //Constructor for Shield
     public Shield(String name, int defensePower) {
         super(name, "Shield with " + defensePower + " defense power.");
         this.defensePower = defensePower;
@@ -9,6 +8,8 @@ class Shield extends Item {
 
     @Override
     public void use(Fighter user) {
+        System.out.println(user.getName() + " uses " + name + " to raise a shield.");
+        user.addTemporaryDefense(defensePower, 3); // 3 rundor
 
     }
 

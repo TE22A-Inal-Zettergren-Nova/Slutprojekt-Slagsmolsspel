@@ -1,15 +1,34 @@
-public abstract class Warrior extends Fighter {
-    private Weapon weapon;
+// Abstract class for all warrior-type characters (Knight, Marksman, etc.)
+abstract class Warrior extends Fighter {
+    protected Weapon weapon;  // The weapon equipped by the warrior, which affects damage output
+    protected int level;      // The current level of the warrior (used for progression)
 
-    public Warrior(double defence, double speed, int health, String name, int strength, SpecialAbility specialAbility, Weapon weapon) {
-        super(defence, speed, health, name, strength, specialAbility);
-        this.weapon = weapon;
+    // Constructor to initialize the warrior's stats, weapon, and shield
+    public Warrior(String name, int health, double speed, int strength, int defense, Weapon weapon, Shield shield) {
+        super(name, health, speed, strength, defense); // Initialize base Fighter stats (health, speed, strength, etc.)
+        this.weapon = weapon;  // Set the warrior's weapon
+        this.level = 1;        // Default level 1 for now
     }
 
-    // Abstract method som kommer att implementeras i subklasserna
-    public abstract void attack(Fighter opponent);
+    // Warrior's attack method - uses both strength and weapon attack power
+    @Override
+    public void attack(Fighter enemy) {
+        // Calculate total damage by adding strength and weapons attack power
+        int totalDamage = strength + weapon.getAttackPower();
+        System.out.println(name + " attacks with " + weapon.getName() + " for " + totalDamage + " damage.");
 
-    public void reloadPowers(){ //laddar upp en del av magikerns mana eller krigarens strength beroende på vilken karaktär man är
+        // apply the calculated damage to the enemy
+        enemy.takeDamage(totalDamage);
+    }
 
+    // Warrior's dodge ability, uses speed to determine dodge chance
+    @Override
+    public void dodge() {
+        // If a random value is less than the warrior's speed (scaled by 0.3), the dodge succeeds
+        if (Math.random() < speed * 0.3) {
+            System.out.println(name + " dodged the attack!");
+        } else {
+            System.out.println(name + " failed to dodge.");
+        }
     }
 }
