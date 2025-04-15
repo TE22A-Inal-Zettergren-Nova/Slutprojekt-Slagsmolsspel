@@ -77,5 +77,22 @@ abstract class Fighter {
     public String getName() {
         return name;
     }
+    //This is for the potion class
+    // Heals the fighter by a given amount
+    public void heal(int amount) {
+        health += amount;
+        System.out.println(name + " healed for " + amount + ". Health: " + health);
+    }
 
+    // Increases speed temporarily or permanently (depending on use)
+    public void boostSpeed(double amount) {
+        speed += amount;
+        System.out.println(name + " speed increased to " + speed);
+    }
+
+    // Increases strength stat
+    public void boostStrength(int amount) {
+        strength += amount;
+        System.out.println(name + " strength increased to " + strength);
+    }
 }
