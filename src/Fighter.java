@@ -70,8 +70,6 @@ abstract class Fighter {
     // Abstract method for dodge behavior (to be implemented in subclasses)
     public abstract void dodge();
 
-    // Abstract method for using the special ability (implemented in subclasses)
-    public abstract void useSpecial(Fighter target);
 
     //Returns the name of the fighter
     public String getName() {
