@@ -16,8 +16,16 @@ class Potion extends Item {
             // If it's a health potion, heal the user by effectValue
             case "health" -> user.heal(effectValue);
 
-            // If it's a mana potion //Kan implementeras efter mage är klar
-            case "mana" -> System.out.println("Only mage uses mana.");
+            // If it's a mana potion and the user is a Mage
+            case "mana" -> {
+                if (user instanceof Mage mageUser) {
+                    // Cast the user to a Mage to access their mana
+                    mageUser.restoreMana(effectValue); // Restore mana for the Mage
+                    System.out.println(mageUser.getName() + " restores " + effectValue + " mana!");
+                } else {
+                    System.out.println("Only mages can use mana potions!");
+                }
+            }
 
             // If it's a speed potion, increase the user's speed (divided by 10 to scale appropriately)
             case "speed" -> user.boostSpeed(effectValue / 10.0);

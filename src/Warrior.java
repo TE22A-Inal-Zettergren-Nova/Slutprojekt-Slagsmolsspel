@@ -1,13 +1,13 @@
 // Abstract class for all warrior-type characters (Knight, Marksman, etc.)
 abstract class Warrior extends Fighter {
     protected Weapon weapon;  // The weapon equipped by the warrior, which affects damage output
-    protected int level;      // The current level of the warrior (used for progression)
+    protected int level; // Level can influence ability power and strenght
 
     // Constructor to initialize the warrior's stats, weapon, and shield
-    public Warrior(String name, int health, double speed, int strength, int defense, Weapon weapon, Shield shield) {
+    public Warrior(String name, int health, double speed, int strength, int defense, Weapon weapon, Shield shield, int level) {
         super(name, health, speed, strength, defense); // Initialize base Fighter stats (health, speed, strength, etc.)
         this.weapon = weapon;  // Set the warrior's weapon
-        this.level = 1;        // Default level 1 for now
+        this.level = 1;        // start level
     }
 
     // Warrior's attack method - uses both strength and weapon attack power
@@ -31,4 +31,5 @@ abstract class Warrior extends Fighter {
             System.out.println(name + " failed to dodge.");
         }
     }
+
 }

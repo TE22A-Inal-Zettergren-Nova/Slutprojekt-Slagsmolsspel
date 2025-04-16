@@ -1,10 +1,9 @@
 class Marksman extends Warrior implements SpecialAbility {
-    protected int level; // Level can influence ability power
 
     // Constructor: initializes Marksman-specific stats and equips a Bow
     public Marksman(String name, Shield shield) {
-        super(name, 100, 1.7, 12, 6, new Weapon("Bow", 9), shield);
-        this.level = 1; // Marksman starts at level 1, levels up one level after defeating an enemy
+        super(name, 100, 1.7, 12, 6, new Weapon("Bow", 9), shield,1);
+        this.strength = strength + level; //increses their strenght with one after each level
     }
 
     // Implementation of the special ability (Fire Arrow) //Kanske ändra systemet men funkar som detta oxå

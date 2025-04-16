@@ -3,8 +3,8 @@ class Knight extends Warrior implements SpecialAbility {
 
     // Constructor: sets Knight-specific stats and equips a Sword
     public Knight(String name, Shield shield) {
-        super(name, 110, 1, 13, 10, new Weapon("Sword", 10), shield);
-        this.level = 1; // Knight starts at level 1, levels up one level after defeating an enemy
+        super(name, 110, 1, 13, 10, new Weapon("Sword", 10), shield, 1);
+        this.strength = strength + level; //increses their strenght with one after each level
     }
 
     // Knight's special ability: Power Strike
