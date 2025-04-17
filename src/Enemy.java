@@ -6,7 +6,6 @@ class Enemy extends Fighter {
     }
 
     @Override
-    public void attack(Fighter opponents) {
     public void attack(Fighter player) {
         // Calculate base damage
         int damage = strength;
@@ -33,14 +32,13 @@ class Enemy extends Fighter {
         player.reduceDefenseRound();
     }
 
+    public boolean tryDodge() {
+        double dodgeChance = speed * 0.15; // Dodge chance based on the enemys speed, higher level = increasd dodge chance
+        return Math.random() < dodgeChance; // Compare to random number to see if enemy dodge
+    }
+
     @Override
     public void dodge() {
-        // Simple dodge chance based on speed
-        double dodgeChance = speed * 0.20; // 20% of speed, dodge chance will increase with higher level eneemys
-        if (Math.random() < dodgeChance) {
-            System.out.println(name + " dodged the attack!");
-        } else {
-            System.out.println(name + " failed to dodge.");
-        }
+       //dosent work to use in the way that i want to because i need to return a boolean.
     }
 }
