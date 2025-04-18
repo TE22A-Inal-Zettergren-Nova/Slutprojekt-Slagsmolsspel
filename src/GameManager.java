@@ -28,6 +28,48 @@ public class GameManager {
 
     }
 
+    // This method asks the player if they want to restart the game after it ends
+    private boolean restartGame() {
+        while (true) {
+            System.out.println("Do you want to restart the game? (yes/no)");
+            String response = scanner.nextLine().trim().toLowerCase(); // Read and normalize the player's input (remove whitespace and convert to lowercase)
+
+            // If the player confirms with "yes" or "y", restart teh game
+            if (response.equals("yes") || response.equals("y")) {
+                System.out.println("Restarting the game...");
+                return true;
+                // If the player declines with "no" or "n", exit the game
+            } else if (response.equals("no") || response.equals("n")) {
+                System.out.println("Thanks for playing!");
+                return false;
+            } else {
+                System.out.println("Please enter 'yes' or 'no'.");
+            }
+        }
+    }
+
+    // This method asks the player if they want to exit the game and confirms their decision.
+    private boolean confirmExit() {
+        while (true) { // Loops until the player provides a valid answer (yes or no)
+            System.out.println("Are you sure you want to exit the game? (yes/no)");
+            String response = scanner.nextLine().trim().toLowerCase(); // Read and normalize the player's input (remove whitespace and convert to lowercase)
+
+            // If the player confirms with "yes" or "y", exit the game
+            if (response.equals("yes") || response.equals("y")) {
+                System.out.println("Exiting game. Goodbye!");
+                return true;  // Confirms the player wants to quit
+            }
+            // If the player declines with "no" or "n", continue the game
+            else if (response.equals("no") || response.equals("n")) {
+                System.out.println("Continuing the game...");
+                return false; // Player changed their mind, continue playing
+            }
+            // Invalid input – ask the player again
+            else {
+                System.out.println("Please enter 'yes' or 'no'.");
+            }
+        }
+    }
 
     private void gameLoop() {
         // Main game loop: Continues running as long as the player is alive.
@@ -50,6 +92,8 @@ public class GameManager {
                     System.out.println("4. Use Item");
                     System.out.println("5. Check Inventory");
                     System.out.println("6. Charge Special Ability");
+                    System.out.println("7. Restart");
+                    System.out.println("8. Quit");
 
                     String action = scanner.nextLine();  // Get the player's action choice from the console
 
@@ -57,7 +101,7 @@ public class GameManager {
                     switch (action) {
                         case "1" -> {  // Player chooses to attack
                             // Enemy tries to dodge before the attack
-                            if (enemy.tryDodge()) {  // If the enemy dodges
+                            if (enemy.dodge()) {  // If the enemy dodges
                                 System.out.println(player.getName() + " tried to attack but " + enemy.getName() + " dodged the attack!");
                             } else {
                                 player.attack(enemy);  // Proceed with the attack if the enemy doesn't dodge
@@ -65,9 +109,12 @@ public class GameManager {
                             turnEnds = true;  // End the player's turn
                         }
                         case "2" -> {  // Player chooses to dodge
-                            player.dodge();  // Perform the dodge action
-                            turnEnds = true;  // End the player's turn
+                            if (player.dodge()) {
+                                continue; // skip enemy turn
+                            }
+                            turnEnds = true; // End the player's turn
                         }
+
                         case "3" -> {  // Player chooses to use special ability
                             // Check if the player has a special ability and if it's charged
                             if (player instanceof SpecialAbility abilityUser) {
@@ -91,6 +138,13 @@ public class GameManager {
                             player.chargeAbility();  // Charge the ability (e.g., refill mana)
                             return;  // Skip the enemy's turn after charging the ability
                         }
+                        case "7" -> {
+                            restartGame(); // Restarts the game if the player wants too
+                        }
+                        case "8" -> {
+                            if (confirmExit()) {
+                                System.exit(0); // Ends the game
+                            }}
 
                         default -> System.out.println("Invalid choice. Choose a number between 1-7");  // Invalid input handling
                     }
@@ -114,20 +168,16 @@ public class GameManager {
                 System.out.println("You won level " + level + "!");  // Victory message
                 level++;  // Increment the level for the next round
             } else if (!player.isAlive()) {
-                System.out.println("You died at level " + level + "!");  // Death message
-                break;  // Exit the game loop if the player dies
+                System.out.println("You died at level " + level + "!");// Death message
+
             }
         }
 
-        System.out.println("Game Over.");  // Print when the game ends
-    }
-
-
-
-
-    public void restart(){ //Låter spelaren starta om spelet,
-
-
+        System.out.println("Game Over."); // Print when the game ends
+        if (restartGame()) {
+            level = 1; // Reset level
+            startGame(); // Start the game from the beginning
+        }
     }
 
     public void addNewItem(Item item){

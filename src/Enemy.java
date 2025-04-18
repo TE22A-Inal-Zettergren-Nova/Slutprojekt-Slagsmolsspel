@@ -32,13 +32,11 @@ class Enemy extends Fighter {
         player.reduceDefenseRound();
     }
 
-    public boolean tryDodge() {
+
+    @Override
+    public boolean dodge() {
         double dodgeChance = speed * 0.15; // Dodge chance based on the enemys speed, higher level = increasd dodge chance
         return Math.random() < dodgeChance; // Compare to random number to see if enemy dodge
     }
 
-    @Override
-    public void dodge() {
-       //dosent work to use in the way that i want to because i need to return a boolean.
-    }
 }

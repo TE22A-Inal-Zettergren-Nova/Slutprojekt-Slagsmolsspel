@@ -23,12 +23,14 @@ abstract class Warrior extends Fighter {
 
     // Warrior's dodge ability, uses speed to determine dodge chance
     @Override
-    public void dodge() {
-        // If a random value is less than the warrior's speed (scaled by 0.3), the dodge succeeds
-        if (Math.random() < speed * 0.3) {
+    public boolean dodge() {
+        // If a random value is less than the warrior's speed (scaled by 0.2), the dodge succeeds
+        if (Math.random() < speed * 0.2) {
             System.out.println(name + " dodged the attack!");
+            return true;
         } else {
             System.out.println(name + " failed to dodge.");
+            return false;
         }
     }
 

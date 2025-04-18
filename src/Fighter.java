@@ -68,7 +68,7 @@ abstract class Fighter {
     public abstract void attack(Fighter enemy);
 
     // Abstract method for dodge behavior (to be implemented in subclasses)
-    public abstract void dodge();
+    public abstract boolean dodge();
 
 
     //Returns the name of the fighter
