@@ -1,45 +1,89 @@
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 class Inventory {
     //stores items in the order they were added, and allows easy access by index
-    private Map<Integer, Item> items = new LinkedHashMap<>();
-    private int nextIndex = 1; //Keeps track of the next available index
+    private final Map<String, ItemStack> items = new LinkedHashMap<>();
 
     //Adds an item to the inventory and assigns it a unique index
     public void addItem(Item item) {
-        items.put(nextIndex, item);
+        String key = item.getName();
+
+        if (items.containsKey(key)) {
+            items.get(key).increment();
+        } else {
+            items.put(key, new ItemStack(item, 1));
+        }
+
         System.out.println(item.getName() + " added to inventory.");
-        nextIndex++;
     }
 
     //Displays all items currently in the inventory
     public void showInventory() {
         if (items.isEmpty()) {
-            System.out.println("Inventory is empty. You have to complete a level to get an item");
+            System.out.println("Inventory is empty.");
             return;
         }
 
-        for (Map.Entry<Integer, Item> entry : items.entrySet()) {
-            System.out.println(entry.getKey() + ". " + entry.getValue().getName()
-                    + " - " + entry.getValue().getDescription());
+        int index = 1;
+        for (ItemStack stack : items.values()) {
+            System.out.println(index + ". " + stack.getItem().getName() + " x" + stack.getQuantity()
+                    + " - " + stack.getItem().getDescription());
+            index++;
         }
     }
 
     //uses an item and removes it from inventory
-    public void useItem(int index, Fighter user) {
-        if (!items.containsKey(index)) {
-            System.out.println("Invalid selection. Choose between those you have.");
+    public void useItem(int itemNumber, Fighter user) {
+        if (itemNumber < 1 || itemNumber > items.size()) {
+            System.out.println("Invalid selection.");
             return;
         }
 
-        Item item = items.remove(index); // Remove item from map
-        item.use(user); // Apply its effect to the fighter
+        // Convert to list to access by index
+        List<ItemStack> itemList = new ArrayList<>(items.values());
+        ItemStack stack = itemList.get(itemNumber - 1);
+
+        // Use the item
+        stack.getItem().use(user);
+        stack.decrement();
+
+        // Remove if quantity becomes 0
+        if (stack.getQuantity() == 0) {
+            items.remove(stack.getItem().getName());
+        }
     }
 
     //Checks wether the inventory is empty
     public boolean isEmpty() {
         return items.isEmpty();
     }
+
+    // Method to generate random items that the player can add to their inventory after each level
+    public void generateRandomItems() {
+        List<Item> potentialItems = new ArrayList<>();
+        // Add different items to the potential items list
+        potentialItems.add(new Shield("Small Shield", 5));
+        potentialItems.add(new Shield("Large Shield", 10));
+        potentialItems.add(new Potion("Healing Potion", "Restores 30 health", "health", 30));
+        potentialItems.add(new Potion("Mana Potion", "Restores 20 mana", "mana", 20));
+        potentialItems.add(new Potion("Speed Potion", "Increases speed", "speed", 15));
+        potentialItems.add(new Potion("Strength Potion", "Increases strength", "strength", 5));
+
+        // Shuffle the potential items and select the first 3 items
+        Collections.shuffle(potentialItems);
+        List<Item> selectedItems = potentialItems.subList(0, 3);
+
+        // Show the selected items to the player
+        System.out.println("Choose an item to add to your inventory:");
+        for (int i = 0; i < selectedItems.size(); i++) {
+            System.out.println((i + 1) + ". " + selectedItems.get(i).getName() + " - " + selectedItems.get(i).getDescription());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of the item to add: ");
+        int itemChoice = Integer.parseInt(scanner.nextLine());
+        addItem(selectedItems.get(itemChoice - 1)); // Add the selected item to the inventory
+    }
 }
+
 

@@ -38,9 +38,4 @@ class Mage extends Warrior implements SpecialAbility {
         this.mana += amount;
         System.out.println(name + "'s mana is now " + mana + ".");
     }
-
-    //returns current value of mana
-    public int getMana() {
-        return mana;
-    }
 }

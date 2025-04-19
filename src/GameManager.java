@@ -1,9 +1,10 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class GameManager {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private Fighter player;  // The player in the game (a Fighter object, which could be any character class like Knight, Mage, etc.)
     private int level = 1;  // Keeps track of the current level in the game
+    private final Inventory inventory = new Inventory();
 
     // Method to start the game by asking the player to choose their class
     public void startGame() {
@@ -19,10 +20,8 @@ public class GameManager {
             case "1" -> player = new Knight("Knight", shield);  // If player chooses 1, create a Knight with a shield
             case "2" -> player = new Marksman("Marksman", shield);  // If player chooses 2, create a Marksman with a shield
             case "3" -> player = new Mage("Mage", shield);  // If player chooses 3, create a Mage with a shield
-            default -> {
-                // If the input is not valid (not 1, 2, or 3), show an error message
-                System.out.println("Invalid choice. Choose a number between 1-3");
-            }
+            default -> // If the input is not valid (not 1, 2, or 3), show an error message
+                    System.out.println("Invalid choice. Choose a number between 1-3");
         }
         gameLoop();
 
@@ -128,19 +127,16 @@ public class GameManager {
                                 System.out.println("This class has no special ability. You can only choose 1,2,4,5");
                             }
                         }
-                        case "4" -> {
-                            // Here, code to use items could be added (e.g., healing potions)
-                        }
-                        case "5" -> {
-                            // Code for showing the player's inventory could be added here
-                        }
+                        case "4" ->
+                            useItem();
+
+                        case "5" -> inventory.showInventory();
                         case "6" -> {  // Player chooses to charge their special ability
                             player.chargeAbility();  // Charge the ability (e.g., refill mana)
                             return;  // Skip the enemy's turn after charging the ability
                         }
-                        case "7" -> {
-                            restartGame(); // Restarts the game if the player wants too
-                        }
+                        case "7" -> restartGame(); // Restarts the game if the player wants too
+
                         case "8" -> {
                             if (confirmExit()) {
                                 System.exit(0); // Ends the game
@@ -166,6 +162,7 @@ public class GameManager {
             // After the battle, check if the player defeated the enemy or died
             if (player.isAlive() && !enemy.isAlive()) {
                 System.out.println("You won level " + level + "!");  // Victory message
+                inventory.generateRandomItems();  // Generating random items and adding them to inventory
                 level++;  // Increment the level for the next round
             } else if (!player.isAlive()) {
                 System.out.println("You died at level " + level + "!");// Death message
@@ -180,7 +177,18 @@ public class GameManager {
         }
     }
 
-    public void addNewItem(Item item){
 
-    }
-}
+    // Method to handle using an item from the inventory
+    private void useItem() {
+        if (inventory.isEmpty()) {  // If the inventory is empty
+            System.out.println("No items in inventory.");
+        } else {
+            inventory.showInventory();  // Show items in the inventory
+            System.out.print("Enter the item number to use: ");
+            int itemIndex = Integer.parseInt(scanner.nextLine());  // Read the chosen item number
+            inventory.useItem(itemIndex, player);  // Use the selected item
+        }
+    }}
+
+
+
