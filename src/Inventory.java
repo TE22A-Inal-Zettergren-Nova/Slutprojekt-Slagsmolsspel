@@ -62,12 +62,12 @@ class Inventory {
     public void generateRandomItems() {
         List<Item> potentialItems = new ArrayList<>();
         // Add different items to the potential items list
-        potentialItems.add(new Shield("Small Shield", 5));
-        potentialItems.add(new Shield("Large Shield", 10));
-        potentialItems.add(new Potion("Healing Potion", "Restores 30 health", "health", 30));
-        potentialItems.add(new Potion("Mana Potion", "Restores 20 mana", "mana", 20));
-        potentialItems.add(new Potion("Speed Potion", "Increases speed", "speed", 15));
-        potentialItems.add(new Potion("Strength Potion", "Increases strength", "strength", 5));
+        potentialItems.add(new Shield("\u001b[34mSmall Shield\u001B[0m", 10));
+        potentialItems.add(new Shield("\u001b[34mLarge Shield\u001B[0m", 20));
+        potentialItems.add(new Potion("\u001b[32mHealing Potion\u001B[0m", "Restores 30 health", "health", 30));
+        potentialItems.add(new Potion("\u001b[35mMana Potion\u001B[0m", "Restores 20 mana", "mana", 20));
+        potentialItems.add(new Potion("\u001b[36mSpeed Potion\u001B[0m", "Increases speed", "speed", 15));
+        potentialItems.add(new Potion("\u001b[31mStrength Potion\u001B[0m", "Increases strength", "strength", 8));
 
         // Shuffle the potential items and select the first 3 items
         Collections.shuffle(potentialItems);

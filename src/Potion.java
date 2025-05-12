@@ -21,7 +21,7 @@ class Potion extends Item {
                 if (user instanceof Mage mageUser) {
                     // Cast the user to a Mage to access their mana
                     mageUser.restoreMana(effectValue); // Restore mana for the Mage
-                    System.out.println(mageUser.getName() + " restores " + effectValue + " mana!");
+                    System.out.println("\u001b[36m"+ mageUser.getName() + " restores " + effectValue + " mana!\u001B[0m");
                 } else {
                     System.out.println("Only mages can use mana potions!");
                 }

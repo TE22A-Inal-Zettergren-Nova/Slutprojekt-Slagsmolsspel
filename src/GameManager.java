@@ -190,6 +190,7 @@ public class GameManager {
             if (player.isAlive() && !enemy.isAlive()) {
                 System.out.println("You won level " + level + "!");  // Victory message
                 System.out.println("Advancing to the next level");
+                System.out.println();
                 inventory.generateRandomItems();  // Generating random items and adding them to inventory
                 level++;  // Increment the level for the next round
 
