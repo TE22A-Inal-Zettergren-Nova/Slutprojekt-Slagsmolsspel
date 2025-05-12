@@ -22,10 +22,4 @@ class Marksman extends Warrior implements SpecialAbility {
         }
     }
 
-    @Override
-    public String getStats() {
-        this.strength = strength + level; //increses their strenght with one after each level
-        int extraDamage = strength + weapon.getAttackPower() + 6 + level;
-        return super.getStats() + "\nSpecial Ability Damage: " + extraDamage; // Specialability added
-    }
 }

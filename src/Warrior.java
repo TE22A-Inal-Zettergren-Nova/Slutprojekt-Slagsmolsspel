@@ -3,11 +3,11 @@ abstract class Warrior extends Fighter {
     protected Weapon weapon;  // The weapon equipped by the warrior, which affects damage output
     protected int level; // Level can influence ability power and strenght
 
-    // Constructor to initialize the warrior's stats, weapon, and shield
+    // Constructor to initialize the warrior's stats, weapon, and shield // Sheild and level is not initilized in this class but is used in the subclasses
     public Warrior(String name, int health, double speed, int strength, int defense, Weapon weapon, Shield shield, int level) {
         super(name, health, speed, strength, defense); // Initialize base Fighter stats (health, speed, strength, etc.)
         this.weapon = weapon;  // Set the warrior's weapon
-        this.level = 1;        // start level
+        this.level = 1; // start level
     }
 
     // Warrior's attack method - uses both strength and weapon attack power
