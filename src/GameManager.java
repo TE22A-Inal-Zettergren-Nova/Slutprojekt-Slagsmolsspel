@@ -154,9 +154,10 @@ public class GameManager {
                             useItem();
 
                         case "5" -> inventory.showInventory();
-                        case "6" ->   // Player chooses to charge their special ability
+                        case "6" -> { // Player chooses to charge their special ability
                             player.chargeAbility();  // Charge the ability (e.g., refill mana)
-
+                            enemy.attack(player);
+                        }
                         case "7" -> {
                             if(restartGame()){
                                 startGame();
@@ -170,7 +171,7 @@ public class GameManager {
                             }
                         }
 
-                        default -> System.out.println("Invalid choice. Choose a number between 1-7");  // Invalid input handling
+                        default -> System.out.println("Invalid choice. Choose a number between 1-8");  // Invalid input handling
                     }
 
                     // If the enemy is defeated, exit the inner loop and go to the next level
