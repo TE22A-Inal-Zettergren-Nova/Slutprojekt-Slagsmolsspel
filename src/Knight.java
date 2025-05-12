@@ -15,12 +15,12 @@ class Knight extends Warrior implements SpecialAbility {
         if (abilityCharged) {
             // Extra damage is calculated from strength, weapon power, a base bonus, and level
             int extraDamage = strength + weapon.getAttackPower() + 10 + level;
-            System.out.println(name + " uses Power Strike!");
+            System.out.println("\u001b[34m" + name + " uses Power Strike!\u001B[0m");
             target.takeDamage(extraDamage); // Deal the damage to the target
             abilityCharged = false; // Ability needs to be recharged after use
         } else {
             // Inform player that ability is not ready
-            System.out.println("Ability not charged! Use 'Charge' to ready it.");
+            System.out.println("\u001b[36m Ability not charged! Use 'Charge' to ready it.\u001B[0m");
         }
     }
 

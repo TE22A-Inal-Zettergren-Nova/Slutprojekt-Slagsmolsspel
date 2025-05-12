@@ -61,7 +61,7 @@ abstract class Fighter {
     public void takeDamage(int dmg) {
         int reduced = (int) (dmg * (1 - defense / 100.0)); //Mechanism too determent reduced incoming damage based on players defence
         health -= Math.max(reduced, 0);
-        System.out.println(name + " took " + reduced + " damage. Health: " + health);
+        System.out.println("\u001b[31m" + name + " took " + reduced + " damage.\u001B[0m \u001b[32mHealth: " + health + "\u001B[0m");
     }
 
     // Abstract method to define how each subclass performs a basic attack implemented in subklasses
@@ -78,18 +78,18 @@ abstract class Fighter {
     // Heals the fighter by a given amount
     public void heal(int amount) {
         health += amount;
-        System.out.println(name + " healed for " + amount + ". Health: " + health);
+        System.out.println("\u001b[32m" + name + " healed for " + amount + ".\u001B[0m" + "\u001b[32m Health: " + health + "\u001B[0m");
     }
 
     // Increases speed temporarily or permanently (depending on use)
     public void boostSpeed(double amount) {
         speed += amount;
-        System.out.println(name + " speed increased to " + speed);
+        System.out.println("\u001b[36m" + name + " speed increased to " + speed + "\u001B[0m");
     }
 
     // Increases strength stat
     public void boostStrength(int amount) {
         strength += amount;
-        System.out.println(name + " strength increased to " + strength);
+        System.out.println("\u001b[31m" + name + " strength increased to " + strength + "\u001B[0m");
     }
 }

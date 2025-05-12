@@ -13,12 +13,12 @@ class Marksman extends Warrior implements SpecialAbility {
         if (abilityCharged) { // Ability can only be used if charged
             // Calculates damage using strength, weapon power, bonus, and level
             int fireArrow = strength + weapon.getAttackPower() + 6 + level;
-            System.out.println(name + " uses Fire Arrow!");
+            System.out.println("\u001b[32m" + name + " uses Fire Arrow!\u001B[0m");
             target.takeDamage(fireArrow); // Deal the calculated damage to the target
             abilityCharged = false; // Ability must be recharged before next use
         } else {
             // Inform player that ability is not ready
-            System.out.println("Ability not charged! Use 'Charge' to ready it.");
+            System.out.println("\u001b[34m Ability not charged! Use 'Charge' to ready it.\u001B[0m");
         }
     }
 

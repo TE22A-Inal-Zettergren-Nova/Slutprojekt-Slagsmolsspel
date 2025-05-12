@@ -2,7 +2,7 @@ class Enemy extends Fighter {
 
     // Constructor for the enemy, sets health, speed, strength, and defense based on level
     public Enemy(String name, int level) {
-        super(name, 50 + level * 10, 0.8 + level * 0.2, 10 + 2 + level, 5 + level);
+        super(name, 50 + level * 5, 0.8 + level * 0.1, 10 + level, 5 + level);
     }
 
     @Override

@@ -16,12 +16,12 @@ class Mage extends Warrior implements SpecialAbility {
             mana -= 20; // Deduct mana for using the ability
             int heal = 30 + (level*2);
             health += heal; // Heal self
-            System.out.println(name + " heals themselves for " + heal + " HP!");
-            System.out.println(mana); // Display remaining mana
+            System.out.println("\u001b[32m" + name + " heals themselves for " + heal + " HP!\u001B[0m");
+            System.out.println("Mana amount: " + mana); // Display remaining mana
             abilityCharged = mana != 0; // Only charged if mana remains
         } else {
             // Inform player they need to recharge
-            System.out.println("You have no mana! Use 'Charge' to ready it.");
+            System.out.println("\u001b[36m Ability not charged! Use 'Charge' to ready it.\u001B[0m");
         }
     }
 
@@ -31,13 +31,13 @@ class Mage extends Warrior implements SpecialAbility {
         System.out.println(name + " is charging their ability... Vulnerable this round!");
         abilityCharged = true;
         mana = 50; // Restore mana to full
-        System.out.println("You have: " + mana + " mana"); // Display current mana
+        System.out.println("\u001b[35m You have: " + mana + " mana\u001B[0m"); // Display current mana
     }
 
     // Method to restore mana, via mana potion
     public void restoreMana(int amount) {
         this.mana += amount;
-        System.out.println(name + "'s mana is now " + mana + ".");
+        System.out.println("\u001b[35m" + name + "'s mana is now " + mana + ".\u001B[0m");
     }
 
 }

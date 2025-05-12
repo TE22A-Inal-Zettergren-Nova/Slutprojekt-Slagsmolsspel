@@ -13,13 +13,14 @@ public class GameManager {
         System.out.println("Here are your choices:");
 
         // Provide more details about each class
-        System.out.println("1. Knight: A balanced warrior with strong armor and decent attack. Good for beginners.");
-        System.out.println("   Stats: Health: 120, Attack: 20, Defense: 15, Special Ability: Power Slash");
-        System.out.println("2. Marksman: A skilled ranged attacker with high agility and critical damage. Best for players who like speed.");
-        System.out.println("   Stats: Health: 100, Attack: 25, Defense: 10, Special Ability: Fire Arrows");
-        System.out.println("3. Mage: A powerful spellcaster who deals massive damage but has low defense. Great for players who enjoy magic.");
-        System.out.println("   Stats: Health: 80, Attack: 30, Defense: 5, Special Ability: Healing Spell \n");
+        System.out.println("\u001b[34m 1. Knight: A balanced warrior with strong armor and decent attack. Good for beginners.\u001B[0m");
+        System.out.println("\u001b[34m   Stats: Health: 120, Attack: 20, Defense: 15, Special Ability: Power Slash\u001B[0m");
+        System.out.println("\u001b[32m 2. Marksman: A skilled ranged attacker with high agility and critical damage. Best for players who like speed.\u001B[0m");
+        System.out.println("\u001b[32m   Stats: Health: 100, Attack: 25, Defense: 10, Special Ability: Fire Arrows\u001B[0m");
+        System.out.println("\u001b[35m 3. Mage: A powerful spellcaster who deals massive damage but has low defense. Great for players who enjoy magic.\u001B[0m");
+        System.out.println("\u001b[35m   Stats: Health: 80, Attack: 30, Defense: 5, Special Ability: Healing Spell\u001B[0m");
 
+        System.out.println("Player Choice: ");
 
         Shield shield = new Shield("Basic Shield", 5);  // A default shield with 5 defense for all classes
         boolean validChoice = false;
@@ -175,7 +176,6 @@ public class GameManager {
                     // If the enemy is defeated, exit the inner loop and go to the next level
                     if (!enemy.isAlive()) {
                         System.out.println("You defeated the enemy!");
-                        System.out.println("Advancing to the next level");
                         break;
                     }
                 }
@@ -189,6 +189,7 @@ public class GameManager {
             // After the battle, check if the player defeated the enemy or died
             if (player.isAlive() && !enemy.isAlive()) {
                 System.out.println("You won level " + level + "!");  // Victory message
+                System.out.println("Advancing to the next level");
                 inventory.generateRandomItems();  // Generating random items and adding them to inventory
                 level++;  // Increment the level for the next round
 
