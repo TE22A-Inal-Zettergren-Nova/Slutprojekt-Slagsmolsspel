@@ -5,7 +5,9 @@ class Knight extends Warrior implements SpecialAbility {
     public Knight(String name, Shield shield) {
         super(name, 110, 1, 13, 10, new Weapon("Sword", 10), shield, 1);
         this.strength = strength + level; //increses their strenght with one after each level
+
     }
+
 
     // Knight's special ability: Power Strike
     @Override
@@ -21,4 +23,5 @@ class Knight extends Warrior implements SpecialAbility {
             System.out.println("Ability not charged! Use 'Charge' to ready it.");
         }
     }
+
 }

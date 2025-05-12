@@ -70,7 +70,6 @@ abstract class Fighter {
     // Abstract method for dodge behavior (to be implemented in subclasses)
     public abstract boolean dodge();
 
-
     //Returns the name of the fighter
     public String getName() {
         return name;

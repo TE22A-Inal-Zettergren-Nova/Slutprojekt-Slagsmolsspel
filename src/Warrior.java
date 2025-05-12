@@ -21,6 +21,7 @@ abstract class Warrior extends Fighter {
         enemy.takeDamage(totalDamage);
     }
 
+
     // Warrior's dodge ability, uses speed to determine dodge chance
     @Override
     public boolean dodge() {

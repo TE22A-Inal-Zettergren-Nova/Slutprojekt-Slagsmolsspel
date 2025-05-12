@@ -5,6 +5,7 @@ class Mage extends Warrior implements SpecialAbility {
     public Mage(String name, Shield shield) {
         super(name, 90, 1.4, 10, 4, new Weapon("Staff", 8), shield, 1); // Slightly less health but faster than Knight
         this.mana = 40; // Starting mana
+        this.level ++;
         this.strength = strength + level; //increses their strenght with one after each level
     }
 
@@ -13,7 +14,7 @@ class Mage extends Warrior implements SpecialAbility {
     public void useAbility(Fighter target) {
         if (mana >= 20) { // Check if enough mana is available
             mana -= 20; // Deduct mana for using the ability
-            int heal = 30;
+            int heal = 30 + (level*2);
             health += heal; // Heal self
             System.out.println(name + " heals themselves for " + heal + " HP!");
             System.out.println(mana); // Display remaining mana
@@ -30,7 +31,7 @@ class Mage extends Warrior implements SpecialAbility {
         System.out.println(name + " is charging their ability... Vulnerable this round!");
         abilityCharged = true;
         mana = 50; // Restore mana to full
-        System.out.println(mana); // Display current mana //Justera senare mest för att se att det funkar👍
+        System.out.println("You have: " + mana + " mana"); // Display current mana
     }
 
     // Method to restore mana, via mana potion
@@ -38,4 +39,5 @@ class Mage extends Warrior implements SpecialAbility {
         this.mana += amount;
         System.out.println(name + "'s mana is now " + mana + ".");
     }
+
 }

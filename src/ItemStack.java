@@ -1,3 +1,5 @@
+// Represents a stack of identical items in the inventory (e.g., 3 Healing Potions)
+
 class ItemStack {
     private final Item item;
     private int quantity;
@@ -15,10 +17,11 @@ class ItemStack {
         return quantity;
     }
 
+    // Increases the quantity by 1 (e.g., when collecting another of the same item)
     public void increment() {
         quantity++;
     }
-
+    // Decreases the quantity by 1 (e.g., after using one of the items)
     public void decrement() {
         quantity--;
     }

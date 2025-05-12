@@ -8,23 +8,45 @@ public class GameManager {
 
     // Method to start the game by asking the player to choose their class
     public void startGame() {
-        System.out.println("Welcome! Choose your class:");
-        System.out.println("1. Knight\n2. Marksman\n3. Mage");
-        //Lägg till förklaring för varje klass!!!
+        System.out.println("Welcome to the game! Before you begin, let's choose your class.");
+        System.out.println("Each class has different stats and abilities.");
+        System.out.println("Here are your choices:");
 
-        String choice = scanner.nextLine();  // Read the player's choice input
+        // Provide more details about each class
+        System.out.println("1. Knight: A balanced warrior with strong armor and decent attack. Good for beginners.");
+        System.out.println("   Stats: Health: 120, Attack: 20, Defense: 15, Special Ability: Power Slash");
+        System.out.println("2. Marksman: A skilled ranged attacker with high agility and critical damage. Best for players who like speed.");
+        System.out.println("   Stats: Health: 100, Attack: 25, Defense: 10, Special Ability: Fire Arrows");
+        System.out.println("3. Mage: A powerful spellcaster who deals massive damage but has low defense. Great for players who enjoy magic.");
+        System.out.println("   Stats: Health: 80, Attack: 30, Defense: 5, Special Ability: Healing Spell \n");
+
+
         Shield shield = new Shield("Basic Shield", 5);  // A default shield with 5 defense for all classes
+        boolean validChoice = false;
 
-        // Switch statement to assign the chosen class to the player
-        switch (choice) {
-            case "1" -> player = new Knight("Knight", shield);  // If player chooses 1, create a Knight with a shield
-            case "2" -> player = new Marksman("Marksman", shield);  // If player chooses 2, create a Marksman with a shield
-            case "3" -> player = new Mage("Mage", shield);  // If player chooses 3, create a Mage with a shield
-            default -> // If the input is not valid (not 1, 2, or 3), show an error message
-                    System.out.println("Invalid choice. Choose a number between 1-3");
+        while (!validChoice) {
+            String choice = scanner.nextLine();  // Read the player's choice input
+            // Switch statement to assign the chosen class to the player
+            switch (choice) {
+                case "1" -> {
+                    player = new Knight("Knight", shield);  // If player chooses 1, create a Knight with a shield
+                    validChoice = true;
+                }
+                case "2" -> {
+                    player = new Marksman("Marksman", shield);  // If player chooses 2, create a Marksman with a shield
+                    validChoice = true;
+                }
+                case "3" -> {
+                    player = new Mage("Mage", shield);  // If player chooses 3, create a Mage with a shield
+                    validChoice = true;
+                }
+                default -> System.out.println("Invalid choice. Choose a number between 1-3");
+
+            }
         }
-        gameLoop();
+        System.out.println("You have chosen the " + player.getName() + " class!");
 
+        gameLoop(); // Start the main game loop after a valid class is chosen
     }
 
     // This method asks the player if they want to restart the game after it ends
@@ -39,7 +61,7 @@ public class GameManager {
                 return true;
                 // If the player declines with "no" or "n", exit the game
             } else if (response.equals("no") || response.equals("n")) {
-                System.out.println("Thanks for playing!");
+                System.out.println("Continuing the game...");
                 return false;
             } else {
                 System.out.println("Please enter 'yes' or 'no'.");
@@ -131,16 +153,21 @@ public class GameManager {
                             useItem();
 
                         case "5" -> inventory.showInventory();
-                        case "6" -> {  // Player chooses to charge their special ability
+                        case "6" ->   // Player chooses to charge their special ability
                             player.chargeAbility();  // Charge the ability (e.g., refill mana)
-                            return;  // Skip the enemy's turn after charging the ability
+
+                        case "7" -> {
+                            if(restartGame()){
+                                startGame();
+                                // Restarts the game from the start if the player wants too
+                            }
                         }
-                        case "7" -> restartGame(); // Restarts the game if the player wants too
 
                         case "8" -> {
                             if (confirmExit()) {
                                 System.exit(0); // Ends the game
-                            }}
+                            }
+                        }
 
                         default -> System.out.println("Invalid choice. Choose a number between 1-7");  // Invalid input handling
                     }
@@ -164,6 +191,7 @@ public class GameManager {
                 System.out.println("You won level " + level + "!");  // Victory message
                 inventory.generateRandomItems();  // Generating random items and adding them to inventory
                 level++;  // Increment the level for the next round
+
             } else if (!player.isAlive()) {
                 System.out.println("You died at level " + level + "!");// Death message
 

@@ -1,5 +1,5 @@
 public class Main {
     public static void main(String[] args) {
-        new GameManager().startGame();
+        new GameManager().startGame(); //Starts the game
     }
 }
